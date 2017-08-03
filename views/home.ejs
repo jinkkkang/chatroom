@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include chathead.ejs %>
+  </head>
+  <div class="alert alert-success" role="alert" style="text-align:center">
+  <a  class="alert-link"> KANGKANG CHAT WITH HAPPY </a><a id="name"><%= username %></a>
+  <a href="manger" id="manger" class="alert-link" >
+  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+    账户管理</a>
+  <a id="logout" href="logout" class="alert-link"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>  退出</a>
+  </div>
+  <script type="text/javascript">
+  $(document).ready(function() {
+  $(window).keydown(function (e) {
+    if (e.keyCode == 116) {
+      // if (!confirm("刷新将会清除所有聊天记录，确定要刷新么？")) {
+      //   e.preventDefault();
+      // }
+      if (confirm("刷新将会清除所有聊天记录，确定要刷新么？")) {
+        window.reload();
+      }
+    }
+  });
+ })
+  </script>
+  <body>
+  <button id="showonline" class="btn alert-success" type="button">
+   用户列表 <span id="onlinecount" class="badge"></span>
+  </button>
+    <div class="alert alert-success" id="chatmessage" role="alert">
+    </div>
+  <div class="alert alert-success" id="showuser" role="alert" style="list-style-type:none;">
+    </div>
+      <div class="alert alert-success" id="myinfo" role="alert">
+      <br>
+      <br>
+      <br>
+      <img class="center-block" width="100" height="100" style="border-radius:52px" src=<%= avator %> alt="">
+      <br>
+      <br>
+      <hr>
+      <br>
+      <div class="text-center"><span class="label label-success">我的名字</span><p><%= username %></p></div>
+      <div class="text-center"><span class="label label-default">我的性别</span><p><%= sex %></p></div>
+      <div class="text-center"><span class="label label-warning">我的生日</span><p><%= birth %></p></div>
+      <div class="text-center"><span class="label label-default">我的简介</span><p><%= intro%></p></div>
+
+
+    </div>
+    <div id="inputmessage">
+    <textarea  class="form-control" id="information" style="resize:none" rows="3"></textarea>
+    <button id="sendinfo" class="btn-success btn col-sm-12">发送</button>
+    </div>
+
+<!-- 个人信息框-->
+   <div class="modal fade" id="personinfo" tabIndex="-1" role="dialog" aria-labelledby="信息" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title text-center" id="infotitle"></h4>
+            </div>
+            <div class="modal-body">
+            <div class="text-center"><span class="label label-default">头像</span><p id="avator"><img id="peravator" width="107" height="98" style="border-radius:52px" src="" alt=""></p></div>
+            <div class="text-center"><span class="label label-success">生日</span><p id="birth"></p></div>
+            <div class="text-center"><span class="label label-default">性别</span><p id="sex"></p></div>
+            <div class="text-center"><span class="label label-warning">简介</span><p id="intro"></p></div>          
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 个人信息框-->
+
+  </body>
+ <script src='/javascripts/pagejs/home.js'></script>
+</html>

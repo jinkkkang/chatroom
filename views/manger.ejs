@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src='/javascripts/jquery.min.js'></script>
+    <link rel="stylesheet" href='/stylesheets/bootstrap.min.css'>
+    <link rel="stylesheet" href='/stylesheets/layui.css'>
+<link rel="stylesheet" href='/stylesheets/bootstrap-theme.min.css'>
+<link rel="stylesheet" href='/stylesheets/bootstrap-datetimepicker.css'>
+<script src="/javascripts/bootstrap.min.js" ></script>
+<script src="/javascripts/bootstrap-datetimepicker.js" ></script>
+<script src="/javascripts/md5.min.js" ></script>
+<link href="/stylesheets/chosen.min.css" rel="stylesheet" media="screen">
+<script src="/javascripts/chosen.jquery.min.js"></script>
+<script src="/javascripts/layui.js"></script>
+  </head>  
+  <body>
+    <div class="alert alert-success" role="alert" style="text-align:center">
+  <a style="position:absolute;left:65px;" href="javascript:history.back('home')" >返回首页</a>
+  <a  class="alert-link"> KANGKANG CHAT WITH HAPPY </a><a id="name"><%= username %></a>
+  <a href="manger" id="manger" class="alert-link" >
+  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+    账户管理</a>
+  <a id="logout" href="logout" class="alert-link"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>  退出</a>
+  </div>
+
+
+<div>
+
+  <!-- Nav tabs -->
+  <div class="">
+      <ul class="nav nav-tabs" role="tablist" >
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">修改用户密码</a></li>
+        <li role="presentation"><a href="#avator" aria-controls="profile" role="tab" data-toggle="tab">我的资料</a></li>
+        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">查找我的聊天记录</a></li>
+      </ul>
+  </div>
+  
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+    <!-- 修改密码 -->
+              <div class="modal-body">
+              <form class="form-group">
+                  请输入新密码<input class="form-control" type="password" id="chapd1"/>
+                  请确认新密码<input class="form-control" type="password" id="chapd2"/>
+              </form>
+                  <button type="button" class="btn btn-success center-block" id="chapasswd">确认</button>
+          </div>
+
+    <!-- 修改密码 -->
+    </div>
+    <div role="tabpanel" class="tab-pane" id="avator">
+ <!-- 修改个人资料 -->
+
+     <table class="table table-hover">
+     <tr class="active">
+       <td>我的名字</td>
+       <td><%= username %></td>
+     </tr>
+      <tr class="success">
+       <td>我的生日</td>
+       <td><%= birth %></td>
+     </tr>
+       <tr class="danger">
+       <td>我的简介</td>
+       <td><%= intro %></td>
+     </tr>
+      <tr class="info">
+       <td>我的头像</td>
+       <% if(avator)  { %>
+       <td><img height="100" width="200" style="border-radius:20px"  src= <%= avator %> alt="图片无法显示没有头像" ></td>
+       <% }else{ %>
+       <td>你还没有头像</td>
+       <% }%>
+     </tr>
+     </table>
+    <button class="btn btn-success center-block" id="Personalinfo">修改我的资料</button>
+
+    <!-- 修改个人资料 -->
+    </div>
+    <div role="tabpanel" class="tab-pane col-sm-8" id="messages">
+<!-- 查找聊天记录 -->
+<br>
+<div class="form-inline">
+  选择用户
+  <select name="" class="form-control" id="finduser">
+  <option value="1">选择全部</option>
+  </select>
+
+  <input class="form-control input-group" type="text" name="" id="date1">至
+  <input class="form-control input-group" type="text" name="" id="date2">
+  <div class="form-group">
+    <label class="sr-only" for="exampleInputAmount">想要搜索的内容</label>
+    <div class="input-group">
+
+      <div class="input-group-addon"> </div>
+      <input type="text" class="form-control" id="searchcontent" placeholder="想要搜索的内容">
+      <div class="input-group-addon"> </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-success" id="search">搜索</button>
+  <!--聊天记录-->
+<div>
+<table class="table" id="chatmessage"> 
+</table>
+<div id="listpage"></div>
+</div>
+<!--聊天记录-->
+</div>
+
+
+<!-- 查找聊天记录 -->
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- 提示框-->
+   <div class="modal fade" id="remind1" tabIndex="-1" role="dialog" aria-labelledby="信息" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="title"></h4>
+            </div>
+            <div class="modal-body" id="info">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 提示框-->
+
+
+
+
+
+
+<!-- 修改个人资料框-->
+  <div class="modal fade" id="chpersoninfo" tabIndex="-1" role="dialog" aria-labelledby="新增服务器信息" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title">修改个人资料</h4>
+          </div>
+          <div class="modal-body">
+             <form action="editinfo" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="exampleInputEmail1">个人简介</label>
+              <textarea type="text" required="true" class="form-control" name="intro" id="exampleInputEmail1" placeholder="一句话介绍自己吧"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">出生日期</label>
+              <input type="date" required="true" class="form-control" name="birth" id="exampleInputPassword1">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFile">选一张图片做你的头像吧</label>
+              <input type="file" required="true" id="exampleInputFile" name="avator">
+              <p class="help-block">Example block-level help text here.</p>
+            </div>
+          <div class="radio">
+            <label>
+              <input type="radio"  id="optionsRadios1" name="sex" value="girl" checked>
+              我是女生
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio"  id="optionsRadios2" name="sex" value="boy">
+              我是男生
+            </label>
+          </div>
+            <button type="submit" class="btn btn-success col-sm-12 col-md-12 col-lg-12">确定</button>
+          </form>
+          </div>
+          <div class="modal-footer">
+          </div>
+      </div>
+  </div>
+  </div>
+
+<!-- 修改个人资料框-->
+
+ <script src='/javascripts/pagejs/manger.js'></script>
+  </body>
+</html>

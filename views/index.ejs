@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include head.ejs %>
+  </head>
+  <link rel='stylesheet' href='/stylesheets/logsign.css'/>
+  <script src='/javascripts/md5.min.js'></script>
+  <script src='/javascripts/jquery.validate.min.js'></script>
+  <script src='/javascripts/messages_zh.js'></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <style>
+.error{
+  color:red;
+}
+</style>
+  <body>
+  <div class="center-block">
+  <div class="panel panel-success col-sm-8 col-lg-6 col-md-7 center-block">
+  <div class="panel-body">
+
+<ul class="nav nav-tabs nav-justified">
+  <li role="presentation" class="active"><a role="tab" data-toggle="tab"  href="#login">登录</a></li>
+  <li role="presentation"><a role="tab" data-toggle="tab" href="#signin">注册</a></li>
+</ul>
+<br>
+<div class="tab-content">
+
+<!--登录页面-->
+<div role="tabpanel" class="tab-pane active" id="login">
+  <div class="form-group col-lg-6 col-sm-6 col-md-6 col-md-offset-3">
+    <label for="exampleInputEmail1">
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+    用户名</label>
+    <input type="email" class="form-control" id="loginname" placeholder="UserName">
+  </div>
+<div class="form-group col-lg-6 col-sm-12 col-md-6 col-md-offset-3">
+    <label for="exampleInputEmail1">
+    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+    密码</label>
+    <input type="password" class="form-control" id="loginpd" placeholder="PassWord">
+    <div class="btn-group col-lg-8 col-sm-12 col-md-9" style="margin-top:10px;padding-left: 0;padding-right: 5px">
+    <button type="button" id="login1" class="btn btn-success col-md-12 col-sm-12 col-lg-12 center-block">登陆</button>
+    </div>
+    <div class="btn-group col-lg-4 col-sm-12 col-md-3" style="margin-top:10px;padding-left: 5px;padding-right: 0">
+    
+    <button type="button" id="forgetpd" class="btn btn-success col-md-12 col-sm-12 col-lg-12 center-block">忘记密码</button>
+    </div>
+  </div>
+
+</div>
+<!--登录页面-->
+<!--注册页面-->
+
+<div role="tabpane2" class="tab-pane" id="signin">
+<form action="signup" id="signup" method="post" enctype="multipart/form-data" >
+  <div class="form-group col-lg-6 col-sm-12 col-md-6 col-md-offset-3">
+    <label for="exampleInputEmail1">
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+    用户名</label>
+    <input type="text" required="true" class="form-control" name="sgname" id="sgname" placeholder="Username">
+  </div>
+<div class="form-group col-lg-6 col-sm-12 col-md-6 col-md-offset-3">
+    <label for="exampleInputEmail1">
+    <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
+    出生日期</label>
+    <input type="date" required="true" class="form-control" name="sgbirth" id="sgbirth" placeholder="password">
+  </div>
+  <div class="form-group  radio col-lg-6 col-sm-12 col-md-6 col-md-offset-3">
+      <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+    性别</label>
+   <select required="true" name="sex" id="sex" class="form-control">
+   <option value="man">男生</option>
+   <option value="woman">女生</option>
+   </select>
+  </div>
+  <div class="form-group col-lg-6 col-sm-12 col-md-6 col-md-offset-3">
+    <label for="exampleInputEmail1">
+    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+    个人简介</label>
+    <textarea class="form-control" required="true"  id="sgintro" name="sgintro" rows="3" placeholder="个人简介"></textarea>
+  </div>
+  <div class="form-group col-lg-6 col-sm-12 col-md-6 col-md-offset-3">
+    <label for="exampleInputEmail1">
+    <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+    头像</label>
+    <input type="file"  required="true" accept="image/jpg,image/jpeg,image/png" class="form-control" id="sgavator" name="sgavator" placeholder="password">
+    <img src="" id="showsgavator" class="text-center"  alt="">
+  </div>
+  <div class="form-group col-lg-6 col-sm-12 col-md-6 col-md-offset-3">
+    <label for="exampleInputEmail1">
+    <span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
+    密码</label>
+    <input type="password" required="true" class="form-control" id="sgpd1" name="sgpd1" placeholder="密码">
+  </div>
+<div class="form-group col-lg-6 col-sm-12 col-md-6 col-md-offset-3">
+    <label for="exampleInputEmail1">
+    <span class="glyphicon glyphicon-resize-small" aria-hidden="true"></span>
+    确认密码</label>
+    <input type="password" required="true" class="form-control" id="sgpd2" name="sgpd2" placeholder="再输入一次">
+  </div>
+<div class="form-group col-lg-6 col-sm-12 col-md-6 col-md-offset-3">
+    <label for="exampleInputEmail1">
+    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+   输入邮箱账号</label>
+    <input type="email" required="true" class="form-control col-md-6" id="signupemail" name="signupemail"  placeholder="验证码">
+    <p id="Verifi_Code" class="btn btn-success col-md-4 center-block">获取验证码</p>
+  </div>
+<div class="form-group col-lg-6 col-sm-12 col-md-6 col-md-offset-3">
+    <label for="exampleInputEmail1">
+    <span class="glyphicon glyphicon-random" aria-hidden="true"></span>
+   输入邮箱验证码</label>
+    <input type="text" required="true" class="form-control" id="vericode" name="vericode" placeholder="在这里输入邮箱验证码">
+    <input type="submit"  class="btn btn-success col-md-12 col-md-12 col-lg-12 center-block" style="margin-top: 30px;"></input>
+</div>
+</form>
+</div>
+  </div>
+</div>
+</div>
+<!--注册页面-->
+<!-- 提示框-->
+   <div class="modal fade" id="remind" tabIndex="-1" role="dialog" aria-labelledby="信息" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="title"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="info"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 提示框-->
+<!-- 忘记密码框-->
+  <div class="modal fade" id="getpd" tabIndex="-1" role="dialog" aria-labelledby="新增服务器信息" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title">忘记密码？我们会将新密码发往你注册用户时的邮箱</h4>
+          </div>
+          <div class="modal-body">
+              <form class="form-group">
+                  请输入用户名<input class="form-control" type="text" id="forgetname"/>
+                  请输入注册用户时的邮箱地址<input class="form-control" type="text" id="forgetmail"/>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="button" class="btn btn-success" id="getpasswd">确认</button>
+          </div>
+      </div>
+  </div>
+  </div>
+<!-- 忘记密码框-->
+
+</div>
+<script src='/javascripts/pagejs/logsign.js'></script>
+  </body>
+</html>
