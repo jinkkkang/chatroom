@@ -11,7 +11,7 @@ var app = express();
 var config = require("./config");
 
 
-// view engine setup
+// view engine setup sshtest
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
