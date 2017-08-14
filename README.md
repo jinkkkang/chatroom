@@ -1,7 +1,7 @@
 chatroom with follow function
 
-login/signup -- login
-login/signup -- signup
+login/signup -- login .
+login/signup -- signup .
 home -- chating
 forget password
 admin -- chenge password
